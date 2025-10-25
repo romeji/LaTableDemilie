@@ -14,22 +14,23 @@
         body {
             font-family: 'Georgia', serif;
             line-height: 1.6;
-            color: #333;
+            color: #2c2c2c;
             overflow-x: hidden;
         }
 
         /* Header */
         header {
-            background: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(10px);
-            color: white;
-            padding: 1.2rem 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            color: #2c2c2c;
+            padding: 1.5rem 0;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            box-shadow: 0 2px 30px rgba(0,0,0,0.08);
             transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
         }
 
         nav {
@@ -38,41 +39,50 @@
             align-items: center;
             max-width: 1400px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 0 3rem;
         }
 
         .logo {
-            font-size: 2rem;
-            font-weight: bold;
-            background: linear-gradient(135deg, #FFD700, #FFA500);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+            font-size: 1.6rem;
+            font-weight: 300;
+            color: #2c2c2c;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-family: 'Helvetica Neue', sans-serif;
+        }
+
+        .logo span {
+            color: #d4af37;
+            font-weight: 400;
         }
 
         nav ul {
             display: flex;
             list-style: none;
-            gap: 2.5rem;
+            gap: 3rem;
         }
 
         nav a {
-            color: white;
+            color: #2c2c2c;
             text-decoration: none;
             transition: all 0.3s;
-            font-size: 1.05rem;
+            font-size: 0.95rem;
             position: relative;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 300;
+            font-family: 'Helvetica Neue', sans-serif;
         }
 
         nav a::after {
             content: '';
             position: absolute;
             bottom: -5px;
-            left: 0;
+            left: 50%;
+            transform: translateX(-50%);
             width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, #FFD700, #FFA500);
+            height: 1px;
+            background: #d4af37;
             transition: width 0.3s;
         }
 
@@ -81,13 +91,13 @@
         }
 
         nav a:hover {
-            color: #FFD700;
+            color: #d4af37;
         }
 
-        /* Hero Section - SPECTACULAIRE */
+        /* Hero Section */
         .hero {
             height: 100vh;
-            width: 100vw;
+            width: 100%;
             position: relative;
             display: flex;
             align-items: center;
@@ -95,8 +105,6 @@
             text-align: center;
             color: white;
             overflow: hidden;
-            margin-left: calc(-50vw + 50%);
-            margin-right: calc(-50vw + 50%);
         }
 
         .hero-slider {
@@ -114,19 +122,20 @@
             width: 100%;
             height: 100%;
             opacity: 0;
-            transition: opacity 2s ease-in-out;
+            transition: opacity 2.5s ease-in-out;
             background-size: cover;
             background-position: center;
         }
 
         .hero-slide.active {
             opacity: 1;
-            animation: zoomIn 20s ease-out forwards;
+            animation: kenBurns 20s ease-out infinite;
         }
 
-        @keyframes zoomIn {
-            from { transform: scale(1); }
-            to { transform: scale(1.1); }
+        @keyframes kenBurns {
+            0% { transform: scale(1) translateX(0); }
+            50% { transform: scale(1.08) translateX(-2%); }
+            100% { transform: scale(1) translateX(0); }
         }
 
         .hero-slide::before {
@@ -136,99 +145,85 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: radial-gradient(circle at center, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 100%);
+            background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.5) 100%);
         }
 
-        .slide1 { background-image: url('https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=2400&h=1080&fit=crop'); }
-        .slide2 { background-image: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=2400&h=1080&fit=crop'); }
-        .slide3 { background-image: url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=2400&h=1080&fit=crop'); }
+        .slide1 { background-image: url('https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=2400&h=1350&fit=crop'); }
+        .slide2 { background-image: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=2400&h=1350&fit=crop'); }
+        .slide3 { background-image: url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=2400&h=1350&fit=crop'); }
 
         .hero-content {
             position: relative;
             z-index: 10;
-            animation: fadeInUp 1.5s ease;
+            animation: fadeInUp 1.8s ease;
+            max-width: 900px;
+            padding: 0 2rem;
         }
 
         .hero-content h1 {
-            font-size: 5.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 3px 3px 10px rgba(0,0,0,0.8);
-            background: linear-gradient(135deg, #FFD700, #FFA500, #FFD700);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: shimmer 3s infinite;
-            background-size: 200% auto;
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            font-family: 'Helvetica Neue', sans-serif;
+            text-shadow: 2px 2px 20px rgba(0,0,0,0.3);
         }
 
-        @keyframes shimmer {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        .hero-content p {
-            font-size: 1.8rem;
-            margin-bottom: 2.5rem;
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
-            letter-spacing: 2px;
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 3rem;
+            letter-spacing: 3px;
+            font-weight: 300;
+            opacity: 0.95;
+            line-height: 1.8;
         }
 
         .cta-buttons {
             display: flex;
-            gap: 2rem;
+            gap: 1.5rem;
             justify-content: center;
+            flex-wrap: wrap;
         }
 
         .cta-button {
             display: inline-block;
             padding: 1.2rem 3rem;
-            background: linear-gradient(135deg, #FFD700, #FFA500);
-            color: #000;
+            background: #d4af37;
+            color: white;
             text-decoration: none;
-            border-radius: 50px;
-            font-size: 1.2rem;
-            font-weight: bold;
+            font-size: 0.95rem;
+            font-weight: 400;
             transition: all 0.4s;
-            box-shadow: 0 5px 25px rgba(255, 215, 0, 0.4);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            transition: left 0.5s;
-        }
-
-        .cta-button:hover::before {
-            left: 100%;
+            border: 1px solid #d4af37;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-family: 'Helvetica Neue', sans-serif;
         }
 
         .cta-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 40px rgba(255, 215, 0, 0.6);
+            background: transparent;
+            color: white;
+            border-color: white;
+            transform: translateY(-3px);
         }
 
         .cta-button.secondary {
             background: transparent;
-            border: 2px solid #FFD700;
-            color: #FFD700;
+            border: 1px solid white;
+            color: white;
         }
 
         .cta-button.secondary:hover {
-            background: #FFD700;
-            color: #000;
+            background: white;
+            color: #2c2c2c;
+            border-color: white;
         }
 
-        /* Floating badges */
+        /* Hero badges */
         .hero-badges {
             position: absolute;
-            bottom: 40px;
+            bottom: 50px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
@@ -240,28 +235,18 @@
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
             padding: 1rem 2rem;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 215, 0, 0.3);
-            animation: float 3s ease-in-out infinite;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 0.85rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-family: 'Helvetica Neue', sans-serif;
+            font-weight: 300;
         }
 
-        .badge:nth-child(2) {
-            animation-delay: 0.5s;
-        }
-
-        .badge:nth-child(3) {
-            animation-delay: 1s;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        /* Section avec photo d'arrière-plan */
+        /* Section Parallaxe */
         .parallax-section {
             padding: 8rem 2rem;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+            background: linear-gradient(rgba(44,44,44,0.92), rgba(44,44,44,0.92)), 
                         url('https://images.unsplash.com/photo-1559339352-11d035aa65de?w=1920&h=1080&fit=crop') center/cover fixed;
             color: white;
             text-align: center;
@@ -269,22 +254,25 @@
 
         .parallax-section h2 {
             color: white;
-            font-size: 4rem;
+            font-size: 3.5rem;
             margin-bottom: 2rem;
+            font-weight: 300;
+            letter-spacing: 4px;
         }
 
         .parallax-section p {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             max-width: 800px;
-            margin: 0 auto 3rem;
+            margin: 0 auto 4rem;
             line-height: 2;
+            font-weight: 300;
+            letter-spacing: 0.5px;
         }
 
-        /* Stats Section */
         .stats {
             display: flex;
             justify-content: center;
-            gap: 5rem;
+            gap: 6rem;
             margin-top: 3rem;
         }
 
@@ -294,57 +282,69 @@
 
         .stat-number {
             font-size: 4rem;
-            font-weight: bold;
-            background: linear-gradient(135deg, #FFD700, #FFA500);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-weight: 300;
+            color: #d4af37;
+            letter-spacing: 2px;
         }
 
         .stat-label {
-            font-size: 1.2rem;
-            margin-top: 0.5rem;
+            font-size: 1rem;
+            margin-top: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 300;
         }
 
         /* Sections */
         section {
-            padding: 6rem 2rem;
+            padding: 7rem 2rem;
             max-width: 1400px;
             margin: 0 auto;
         }
 
         h2 {
-            font-size: 4rem;
+            font-size: 3.5rem;
             text-align: center;
-            margin-bottom: 4rem;
-            background: linear-gradient(135deg, #1a1a1a, #FFD700);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            margin-bottom: 5rem;
+            color: #2c2c2c;
             position: relative;
+            font-weight: 300;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-family: 'Helvetica Neue', sans-serif;
         }
 
         h2::after {
             content: '';
             display: block;
-            width: 150px;
-            height: 4px;
-            background: linear-gradient(90deg, #FFD700, #FFA500);
-            margin: 1.5rem auto;
-            border-radius: 2px;
+            width: 80px;
+            height: 1px;
+            background: #d4af37;
+            margin: 2rem auto 0;
         }
 
-        /* About Section avec images */
+        /* About Section */
         .about-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 4rem;
+            gap: 5rem;
             align-items: center;
         }
 
         .about-text {
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             line-height: 2;
+            font-weight: 300;
+            letter-spacing: 0.3px;
+        }
+
+        .about-text p {
+            margin-bottom: 2rem;
+        }
+
+        .about-text strong {
+            font-weight: 400;
+            color: #d4af37;
         }
 
         .about-images {
@@ -358,20 +358,20 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 20px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-            transition: transform 0.5s;
+            transition: transform 0.6s ease;
+            filter: grayscale(20%);
         }
 
         .about-image:hover {
-            transform: scale(1.05) rotate(2deg);
+            transform: scale(1.03);
+            filter: grayscale(0%);
         }
 
         .about-images .about-image:first-child {
             grid-row: 1 / 3;
         }
 
-        /* Menu Section - CARDS SPECTACULAIRES */
+        /* Menu Section */
         .menu-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -380,50 +380,52 @@
         }
 
         .menu-card {
-            background: linear-gradient(145deg, #ffffff, #f5f5f5);
-            padding: 0;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
-            transition: all 0.4s;
+            background: white;
             overflow: hidden;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.08);
+            transition: all 0.5s ease;
+            border: 1px solid rgba(212, 175, 55, 0.1);
         }
 
         .menu-card:hover {
-            transform: translateY(-15px) scale(1.02);
-            box-shadow: 0 20px 60px rgba(255, 215, 0, 0.3);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 50px rgba(212, 175, 55, 0.15);
         }
 
         .menu-card-image {
             width: 100%;
-            height: 250px;
+            height: 280px;
             object-fit: cover;
-            transition: transform 0.5s;
+            transition: transform 0.6s ease;
+            filter: grayscale(10%);
         }
 
         .menu-card:hover .menu-card-image {
-            transform: scale(1.1);
+            transform: scale(1.05);
+            filter: grayscale(0%);
         }
 
         .menu-card-content {
-            padding: 2rem;
+            padding: 2.5rem;
         }
 
         .menu-card h3 {
-            background: linear-gradient(135deg, #FFD700, #FFA500);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 1.5rem;
-            font-size: 2rem;
+            color: #2c2c2c;
+            margin-bottom: 2rem;
+            font-size: 1.6rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-family: 'Helvetica Neue', sans-serif;
         }
 
         .menu-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 1.2rem;
-            padding-bottom: 1.2rem;
-            border-bottom: 2px solid #f0f0f0;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #f0f0f0;
         }
 
         .menu-item:last-child {
@@ -431,26 +433,30 @@
         }
 
         .item-name {
-            font-weight: bold;
+            font-weight: 300;
             font-size: 1.05rem;
+            letter-spacing: 0.5px;
         }
 
         .item-price {
-            background: linear-gradient(135deg, #FFD700, #FFA500);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: bold;
-            font-size: 1.3rem;
+            color: #d4af37;
+            font-weight: 400;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
         }
 
-        /* Gallery - GRILLE MODERNE ET CRÉATIVE */
+        /* Gallery moderne et artistique */
+        .gallery-container {
+            margin-top: 4rem;
+            position: relative;
+            min-height: 800px;
+        }
+
         .gallery {
             display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            grid-template-rows: repeat(4, 200px);
-            gap: 2rem;
-            margin-top: 3rem;
+            grid-template-columns: repeat(12, 1fr);
+            grid-template-rows: repeat(8, 100px);
+            gap: 1.5rem;
             padding: 2rem;
         }
 
@@ -458,307 +464,260 @@
             overflow: hidden;
             position: relative;
             cursor: pointer;
-            box-shadow: 0 15px 50px rgba(0,0,0,0.3);
-            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-        /* Formes créatives et superpositions */
         .gallery-item:nth-child(1) {
-            grid-column: 1 / 4;
-            grid-row: 1 / 3;
-            border-radius: 200px 200px 50px 50px;
+            grid-column: 1 / 6;
+            grid-row: 1 / 5;
+            border-radius: 200px 200px 20px 20px;
             z-index: 2;
         }
 
         .gallery-item:nth-child(2) {
-            grid-column: 4 / 6;
-            grid-row: 1 / 2;
-            border-radius: 50px;
-            transform: rotate(-3deg);
-        }
-
-        .gallery-item:nth-child(3) {
-            grid-column: 6 / 7;
-            grid-row: 1 / 3;
-            border-radius: 50px 50px 200px 50px;
-        }
-
-        .gallery-item:nth-child(4) {
-            grid-column: 4 / 7;
-            grid-row: 2 / 4;
-            border-radius: 50px;
-            transform: rotate(2deg);
+            grid-column: 6 / 10;
+            grid-row: 2 / 5;
+            border-radius: 20px;
+            transform: rotate(-2deg);
             z-index: 3;
         }
 
+        .gallery-item:nth-child(3) {
+            grid-column: 10 / 13;
+            grid-row: 1 / 4;
+            border-radius: 20px 20px 200px 20px;
+        }
+
+        .gallery-item:nth-child(4) {
+            grid-column: 1 / 5;
+            grid-row: 5 / 9;
+            border-radius: 20px 200px 20px 20px;
+            transform: rotate(1deg);
+        }
+
         .gallery-item:nth-child(5) {
-            grid-column: 1 / 3;
-            grid-row: 3 / 5;
-            border-radius: 50px 200px 50px 200px;
+            grid-column: 5 / 9;
+            grid-row: 5 / 8;
+            border-radius: 50%;
+            z-index: 4;
         }
 
         .gallery-item:nth-child(6) {
-            grid-column: 3 / 5;
-            grid-row: 4 / 5;
-            border-radius: 200px 50px 200px 50px;
-            transform: rotate(-2deg);
+            grid-column: 9 / 13;
+            grid-row: 4 / 7;
+            border-radius: 20px;
+            transform: rotate(-1deg);
         }
 
         .gallery-item:nth-child(7) {
-            grid-column: 5 / 7;
-            grid-row: 4 / 5;
-            border-radius: 50%;
+            grid-column: 7 / 11;
+            grid-row: 7 / 9;
+            border-radius: 200px 20px 200px 20px;
+            z-index: 2;
         }
 
         .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            filter: brightness(0.9);
+            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+            filter: grayscale(15%);
         }
 
         .gallery-item:hover {
             transform: scale(1.05) translateY(-10px) rotate(0deg) !important;
             z-index: 10 !important;
-            box-shadow: 0 25px 80px rgba(255, 215, 0, 0.5);
+            box-shadow: 0 20px 60px rgba(212, 175, 55, 0.3);
         }
 
         .gallery-item:hover img {
-            transform: scale(1.2);
-            filter: brightness(1.1);
+            transform: scale(1.1);
+            filter: grayscale(0%);
         }
 
-        .gallery-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(255,215,0,0.3), rgba(255,165,0,0.3));
-            opacity: 0;
-            transition: opacity 0.4s;
-            z-index: 1;
-        }
-
-        .gallery-item:hover::before {
-            opacity: 1;
-        }
-
-        /* Contact Section - ULTRA MODERNE */
-        .contact-wrapper {
-            background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
+        /* Contact Section moderne et élégante */
+        #contact {
             padding: 0;
-            border-radius: 0;
-            box-shadow: none;
+            max-width: 100%;
+            background: #f8f8f8;
+        }
+
+        .contact-hero {
+            background: linear-gradient(135deg, rgba(44,44,44,0.95), rgba(44,44,44,0.98)), 
+                        url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=2000&h=1000&fit=crop') center/cover;
+            padding: 5rem 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .contact-hero h2 {
+            color: white;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .contact-wrapper {
+            max-width: 1400px;
+            margin: -100px auto 0;
+            padding: 0 2rem 5rem;
             position: relative;
-            overflow: hidden;
+            z-index: 10;
         }
 
-        .contact-wrapper::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=2000&h=1000&fit=crop') center/cover;
-            opacity: 0.15;
-            z-index: 0;
-        }
-
-        .contact-content {
+        .contact-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0;
-            position: relative;
-            z-index: 1;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 3rem;
+            background: white;
+            box-shadow: 0 20px 80px rgba(0,0,0,0.1);
         }
 
         .contact-info {
-            background: linear-gradient(135deg, rgba(255,215,0,0.95), rgba(255,165,0,0.95));
-            backdrop-filter: blur(20px);
-            padding: 5rem 4rem;
-            border-radius: 0;
-            border: none;
-            color: #000;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .contact-info::before {
-            content: '✨';
-            position: absolute;
-            top: -50px;
-            right: -50px;
-            font-size: 200px;
-            opacity: 0.1;
+            background: linear-gradient(135deg, #2c2c2c, #1a1a1a);
+            padding: 4rem 3rem;
+            color: white;
         }
 
         .contact-info h3 {
-            background: linear-gradient(135deg, #000, #333);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-size: 2rem;
             margin-bottom: 3rem;
-            font-size: 2.5rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #d4af37;
         }
 
         .info-item {
             margin-bottom: 2.5rem;
-            display: flex;
-            align-items: start;
-            gap: 1.5rem;
-            font-size: 1.1rem;
-            background: rgba(0,0,0,0.05);
-            padding: 1.5rem;
-            border-radius: 15px;
+            padding-left: 2rem;
+            border-left: 2px solid #d4af37;
             transition: all 0.3s;
         }
 
         .info-item:hover {
-            background: rgba(0,0,0,0.1);
-            transform: translateX(10px);
+            padding-left: 2.5rem;
+            border-left-width: 3px;
         }
 
-        .info-item strong {
-            color: #000;
-            min-width: 110px;
-            font-size: 1.2rem;
+        .info-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #d4af37;
+            margin-bottom: 0.5rem;
+            font-weight: 300;
+        }
+
+        .info-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            font-weight: 300;
         }
 
         .reservation-form {
-            background: rgba(255,255,255,0.98);
-            padding: 5rem 4rem;
-            border-radius: 0;
-            box-shadow: none;
-            position: relative;
-        }
-
-        .reservation-form::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 5px;
-            height: 100%;
-            background: linear-gradient(to bottom, #FFD700, #FFA500);
+            padding: 4rem 3rem;
         }
 
         .reservation-form h3 {
-            color: #1a1a1a;
+            font-size: 2rem;
             margin-bottom: 3rem;
-            font-size: 2.5rem;
-            position: relative;
-            padding-bottom: 1rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #2c2c2c;
         }
 
-        .reservation-form h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(90deg, #FFD700, #FFA500);
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
         }
 
         .form-group {
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
         .form-group label {
             display: block;
             margin-bottom: 0.8rem;
-            font-weight: bold;
-            color: #1a1a1a;
-            font-size: 1.05rem;
+            font-weight: 300;
+            color: #2c2c2c;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
         }
 
         .form-group input,
         .form-group select {
             width: 100%;
-            padding: 1.2rem;
-            border: 2px solid transparent;
-            border-radius: 15px;
+            padding: 1rem 1.2rem;
+            border: 1px solid #e0e0e0;
             font-family: inherit;
-            font-size: 1.05rem;
+            font-size: 1rem;
             transition: all 0.3s;
-            background: #f8f8f8;
+            background: #fafafa;
+            font-weight: 300;
         }
 
         .form-group input:focus,
         .form-group select:focus {
             outline: none;
-            border-color: #FFD700;
+            border-color: #d4af37;
             background: white;
-            box-shadow: 0 5px 30px rgba(255, 215, 0, 0.3);
-            transform: translateY(-2px);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
         }
 
         .submit-button {
             width: 100%;
-            padding: 1.5rem;
-            background: linear-gradient(135deg, #FFD700, #FFA500);
-            color: #000;
-            border: none;
-            border-radius: 15px;
-            font-size: 1.3rem;
-            font-weight: bold;
+            padding: 1.3rem;
+            background: #d4af37;
+            color: white;
+            border: 1px solid #d4af37;
+            font-size: 0.95rem;
+            font-weight: 400;
             cursor: pointer;
             transition: all 0.4s;
-            box-shadow: 0 8px 30px rgba(255, 215, 0, 0.4);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .submit-button::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.5);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-        }
-
-        .submit-button:hover::before {
-            width: 400px;
-            height: 400px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 1rem;
         }
 
         .submit-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 50px rgba(255, 215, 0, 0.6);
-        }
-
-        .submit-button span {
-            position: relative;
-            z-index: 1;
+            background: transparent;
+            color: #d4af37;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.2);
         }
 
         /* Footer */
         footer {
-            background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
+            background: #1a1a1a;
             color: white;
             text-align: center;
             padding: 3rem;
-            border-top: 3px solid #FFD700;
+            font-weight: 300;
+            letter-spacing: 1px;
         }
 
         footer p {
             margin: 0.5rem 0;
+            font-size: 0.9rem;
         }
 
         /* Animations */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(50px);
+                transform: translateY(40px);
             }
             to {
                 opacity: 1;
@@ -767,13 +726,14 @@
         }
 
         /* Mobile Responsive */
-        @media (max-width: 768px) {
+        @media (max-width: 968px) {
             .hero-content h1 {
                 font-size: 3rem;
+                letter-spacing: 4px;
             }
 
             .about-content,
-            .contact-content,
+            .contact-grid,
             .about-images {
                 grid-template-columns: 1fr;
             }
@@ -781,7 +741,7 @@
             .gallery {
                 grid-template-columns: 1fr;
                 grid-template-rows: repeat(7, 300px);
-                gap: 1.5rem;
+                gap: 2rem;
             }
 
             .gallery-item:nth-child(1),
@@ -797,14 +757,18 @@
                 transform: none !important;
             }
 
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
             nav ul {
-                gap: 1rem;
-                font-size: 0.9rem;
+                gap: 1.5rem;
+                font-size: 0.85rem;
             }
 
             .stats {
                 flex-direction: column;
-                gap: 2rem;
+                gap: 3rem;
             }
 
             h2 {
@@ -825,13 +789,13 @@
 <body>
     <header>
         <nav>
-            <div class="logo">✨ La Table d'Émilie</div>
+            <div class="logo">La Table <span>d'Émilie</span></div>
             <ul>
                 <li><a href="#accueil">Accueil</a></li>
                 <li><a href="#about">À Propos</a></li>
                 <li><a href="#menu">Menu</a></li>
                 <li><a href="#galerie">Galerie</a></li>
-                <li><a href="#contact">Réserver</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
     </header>
@@ -844,16 +808,16 @@
         </div>
         <div class="hero-content">
             <h1>La Table d'Émilie</h1>
-            <p>✨ L'Excellence Gastronomique au Cœur de Paris ✨</p>
+            <p class="hero-subtitle">L'Excellence Gastronomique au Cœur de Paris</p>
             <div class="cta-buttons">
-                <a href="#contact" class="cta-button">Réserver Maintenant</a>
-                <a href="#menu" class="cta-button secondary">Découvrir la Carte</a>
+                <a href="#contact" class="cta-button">Réserver</a>
+                <a href="#menu" class="cta-button secondary">Notre Carte</a>
             </div>
         </div>
         <div class="hero-badges">
-            <div class="badge">⭐ Prix Gault & Millau 2024</div>
-            <div class="badge">🏆 Maître Restaurateur</div>
-            <div class="badge">🌿 Produits Bio & Locaux</div>
+            <div class="badge">Prix Gault & Millau 2024</div>
+            <div class="badge">Maître Restaurateur</div>
+            <div class="badge">Produits Bio & Locaux</div>
         </div>
     </section>
 
@@ -880,18 +844,18 @@
         <h2>Notre Univers</h2>
         <div class="about-content">
             <div class="about-text">
-                <p style="margin-bottom: 2rem;">
-                    🌟 Niché dans le quartier historique du <strong>Marais</strong>, La Table d'Émilie vous accueille dans un écrin élégant où modernité et tradition se rencontrent pour créer une expérience culinaire inoubliable.
+                <p>
+                    Niché dans le quartier historique du <strong>Marais</strong>, La Table d'Émilie vous accueille dans un écrin élégant où modernité et tradition se rencontrent pour créer une expérience culinaire inoubliable.
                 </p>
-                <p style="margin-bottom: 2rem;">
+                <p>
                     Notre cuisine célèbre les <strong>produits de saison</strong>, sourcés chez des producteurs locaux passionnés. Du marché à l'assiette, nous privilégions les circuits courts et le bio pour vous offrir des saveurs authentiques et intenses.
                 </p>
-                <p style="margin-bottom: 2rem;">
+                <p>
                     Chaque plat est une <strong>œuvre d'art</strong> préparée avec amour, créativité et un respect infini pour les ingrédients. Notre engagement : sublimer la gastronomie française tout en innovant avec audace.
                 </p>
-                <p style="font-size: 1.3rem; color: #FFD700; font-weight: bold;">
-                    🏆 Récompensé par le Guide Gault & Millau 2024<br>
-                    ⭐ Certifié Maître Restaurateur
+                <p style="margin-top: 2rem; color: #d4af37;">
+                    <strong>Récompensé par le Guide Gault & Millau 2024</strong><br>
+                    <strong>Certifié Maître Restaurateur</strong>
                 </p>
             </div>
             <div class="about-images">
@@ -908,7 +872,7 @@
             <div class="menu-card">
                 <img src="https://images.unsplash.com/photo-1625944525533-473f1a3d54e7?w=600&h=400&fit=crop" alt="Entrées" class="menu-card-image">
                 <div class="menu-card-content">
-                    <h3>🥗 Entrées</h3>
+                    <h3>Entrées</h3>
                     <div class="menu-item">
                         <span class="item-name">Foie gras maison mi-cuit</span>
                         <span class="item-price">18€</span>
@@ -931,7 +895,7 @@
             <div class="menu-card">
                 <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=600&h=400&fit=crop" alt="Plats" class="menu-card-image">
                 <div class="menu-card-content">
-                    <h3>🍽️ Plats</h3>
+                    <h3>Plats</h3>
                     <div class="menu-item">
                         <span class="item-name">Magret de canard aux figues</span>
                         <span class="item-price">28€</span>
@@ -954,7 +918,7 @@
             <div class="menu-card">
                 <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?w=600&h=400&fit=crop" alt="Desserts" class="menu-card-image">
                 <div class="menu-card-content">
-                    <h3>🍰 Desserts</h3>
+                    <h3>Desserts</h3>
                     <div class="menu-item">
                         <span class="item-name">Tarte tatin revisitée</span>
                         <span class="item-price">10€</span>
@@ -978,101 +942,108 @@
 
     <section id="galerie">
         <h2>Nos Créations Culinaires</h2>
-        <div class="gallery">
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&h=800&fit=crop" alt="Plat signature">
-            </div>
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=600&h=400&fit=crop" alt="Viande grillée">
-            </div>
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&h=400&fit=crop" alt="Dessert raffiné">
-            </div>
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?w=600&h=400&fit=crop" alt="Poisson">
-            </div>
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&h=400&fit=crop" alt="Pizza artisanale">
-            </div>
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=600&h=400&fit=crop" alt="Restaurant ambiance">
-            </div>
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=600&h=400&fit=crop" alt="Plat gastronomique">
+        <div class="gallery-container">
+            <div class="gallery">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&h=800&fit=crop" alt="Plat signature">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=600&h=400&fit=crop" alt="Viande grillée">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&h=400&fit=crop" alt="Dessert raffiné">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?w=600&h=400&fit=crop" alt="Poisson">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&h=400&fit=crop" alt="Pizza artisanale">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=600&h=400&fit=crop" alt="Restaurant ambiance">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=600&h=400&fit=crop" alt="Plat gastronomique">
+                </div>
             </div>
         </div>
     </section>
 
     <section id="contact">
-        <h2>Réservez Votre Table</h2>
+        <div class="contact-hero">
+            <h2>Réservez Votre Expérience</h2>
+            <p>Laissez-vous transporter dans un voyage culinaire inoubliable</p>
+        </div>
         <div class="contact-wrapper">
-            <div class="contact-content">
+            <div class="contact-grid">
                 <div class="contact-info">
-                    <h3>📍 Nous Trouver</h3>
+                    <h3>Informations</h3>
                     <div class="info-item">
-                        <strong>Adresse :</strong>
-                        <span>28 Rue des Francs-Bourgeois<br>75004 Paris, France</span>
+                        <div class="info-label">Adresse</div>
+                        <div class="info-content">28 Rue des Francs-Bourgeois<br>75004 Paris, France</div>
                     </div>
                     <div class="info-item">
-                        <strong>Téléphone :</strong>
-                        <span>01 42 78 56 34</span>
+                        <div class="info-label">Téléphone</div>
+                        <div class="info-content">01 42 78 56 34</div>
                     </div>
                     <div class="info-item">
-                        <strong>Email :</strong>
-                        <span>contact@latabledemeilie.fr</span>
+                        <div class="info-label">Email</div>
+                        <div class="info-content">contact@latabledemeilie.fr</div>
                     </div>
                     <div class="info-item">
-                        <strong>Horaires :</strong>
-                        <span>
-                            <strong>Mardi - Samedi</strong><br>
-                            Déjeuner : 12h00 - 14h30<br>
-                            Dîner : 19h00 - 22h30<br><br>
-                            <strong>Dimanche</strong><br>
-                            Brunch : 12h00 - 15h00<br><br>
+                        <div class="info-label">Horaires</div>
+                        <div class="info-content">
+                            Mardi - Samedi<br>
+                            12h00 - 14h30 & 19h00 - 22h30<br><br>
+                            Dimanche : 12h00 - 15h00<br>
                             Fermé le lundi
-                        </span>
+                        </div>
                     </div>
                 </div>
 
                 <div class="reservation-form">
-                    <h3>✨ Réservation en Ligne</h3>
+                    <h3>Réservation</h3>
                     <form onsubmit="handleSubmit(event)">
-                        <div class="form-group">
-                            <label>Nom complet *</label>
-                            <input type="text" required placeholder="Jean Dupont">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Nom complet</label>
+                                <input type="text" required placeholder="Jean Dupont">
+                            </div>
+                            <div class="form-group">
+                                <label>Téléphone</label>
+                                <input type="tel" required placeholder="06 12 34 56 78">
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label>Email *</label>
+                            <label>Email</label>
                             <input type="email" required placeholder="email@exemple.com">
                         </div>
-                        <div class="form-group">
-                            <label>Téléphone *</label>
-                            <input type="tel" required placeholder="06 12 34 56 78">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Date</label>
+                                <input type="date" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Heure</label>
+                                <select required>
+                                    <option value="">Sélectionner</option>
+                                    <option>12:00</option>
+                                    <option>12:30</option>
+                                    <option>13:00</option>
+                                    <option>13:30</option>
+                                    <option>19:00</option>
+                                    <option>19:30</option>
+                                    <option>20:00</option>
+                                    <option>20:30</option>
+                                    <option>21:00</option>
+                                    <option>21:30</option>
+                                </select>
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label>Date *</label>
-                            <input type="date" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Heure *</label>
+                            <label>Nombre de personnes</label>
                             <select required>
-                                <option value="">Choisir une heure</option>
-                                <option>12:00</option>
-                                <option>12:30</option>
-                                <option>13:00</option>
-                                <option>13:30</option>
-                                <option>19:00</option>
-                                <option>19:30</option>
-                                <option>20:00</option>
-                                <option>20:30</option>
-                                <option>21:00</option>
-                                <option>21:30</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Nombre de personnes *</label>
-                            <select required>
-                                <option value="">Choisir</option>
+                                <option value="">Sélectionner</option>
                                 <option>1 personne</option>
                                 <option>2 personnes</option>
                                 <option>3 personnes</option>
@@ -1082,7 +1053,7 @@
                                 <option>Plus de 6 personnes</option>
                             </select>
                         </div>
-                        <button type="submit" class="submit-button"><span>🎉 Confirmer ma Réservation</span></button>
+                        <button type="submit" class="submit-button">Confirmer la Réservation</button>
                     </form>
                 </div>
             </div>
@@ -1090,9 +1061,9 @@
     </section>
 
     <footer>
-        <p style="font-size: 1.2rem; margin-bottom: 1rem;">✨ La Table d'Émilie ✨</p>
+        <p style="font-size: 1.1rem; margin-bottom: 1rem; letter-spacing: 3px;">LA TABLE D'ÉMILIE</p>
         <p>&copy; 2025 La Table d'Émilie. Tous droits réservés.</p>
-        <p style="margin-top: 1rem;">Développé avec passion pour la gastronomie française 🇫🇷</p>
+        <p style="margin-top: 1rem;">Développé avec passion pour la gastronomie française</p>
     </footer>
 
     <script>
@@ -1106,7 +1077,7 @@
             slides[currentSlide].classList.add('active');
         }
         
-        setInterval(nextSlide, 5000);
+        setInterval(nextSlide, 6000);
 
         // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1125,7 +1096,7 @@
         // Form submission
         function handleSubmit(event) {
             event.preventDefault();
-            alert('🎉 Merci pour votre réservation !\n\nNous vous confirmerons votre réservation par email dans les plus brefs délais.\n\nÀ très bientôt à La Table d\'Émilie ! ✨');
+            alert('Merci pour votre réservation !\n\nNous vous confirmerons votre réservation par email dans les plus brefs délais.\n\nÀ très bientôt à La Table d\'Émilie.');
             event.target.reset();
         }
 
@@ -1154,11 +1125,11 @@
             const currentScroll = window.pageYOffset;
             
             if (currentScroll > 100) {
-                header.style.padding = '0.8rem 0';
-                header.style.background = 'rgba(0, 0, 0, 0.98)';
+                header.style.padding = '1rem 0';
+                header.style.boxShadow = '0 4px 30px rgba(0,0,0,0.12)';
             } else {
-                header.style.padding = '1.2rem 0';
-                header.style.background = 'rgba(0, 0, 0, 0.95)';
+                header.style.padding = '1.5rem 0';
+                header.style.boxShadow = '0 2px 30px rgba(0,0,0,0.08)';
             }
             
             lastScroll = currentScroll;
@@ -1171,7 +1142,13 @@
                 if (!startTimestamp) startTimestamp = timestamp;
                 const progress = Math.min((timestamp - startTimestamp) / duration, 1);
                 const value = Math.floor(progress * (end - start) + start);
-                element.textContent = end > 100 ? value + 'K+' : value + '+';
+                if (end === 7) {
+                    element.textContent = value + '+';
+                } else if (end === 50) {
+                    element.textContent = value + 'K+';
+                } else {
+                    element.textContent = value + '%';
+                }
                 if (progress < 1) {
                     window.requestAnimationFrame(step);
                 }
@@ -1182,23 +1159,19 @@
         const statsObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    const statNumber = entry.target.querySelector('.stat-number');
-                    const finalValue = parseInt(statNumber.textContent);
-                    if (finalValue === 7) {
-                        animateValue(statNumber, 0, 7, 2000);
-                    } else if (finalValue === 50) {
-                        animateValue(statNumber, 0, 50, 2000);
-                    } else if (finalValue === 100) {
-                        animateValue(statNumber, 0, 100, 2000);
-                    }
+                    const statNumbers = document.querySelectorAll('.stat-number');
+                    animateValue(statNumbers[0], 0, 7, 2000);
+                    animateValue(statNumbers[1], 0, 50, 2000);
+                    animateValue(statNumbers[2], 0, 100, 2000);
                     statsObserver.unobserve(entry.target);
                 }
             });
         }, { threshold: 0.5 });
 
-        document.querySelectorAll('.stat-item').forEach(stat => {
-            statsObserver.observe(stat);
-        });
+        const statsSection = document.querySelector('.stats');
+        if (statsSection) {
+            statsObserver.observe(statsSection);
+        }
     </script>
 </body>
 </html>
