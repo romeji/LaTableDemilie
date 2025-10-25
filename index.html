@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Table d'Émilie - Restaurant Gastronomique</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 1.2rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 1.05rem;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #FFD700, #FFA500);
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        nav a:hover {
+            color: #FFD700;
+        }
+
+        /* Hero Section - SPECTACULAIRE */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+        }
+
+        .hero-slider {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+        }
+
+        .hero-slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 100%);
+        }
+
+        .slide1 { background-image: url('https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=1920&h=1080&fit=crop'); }
+        .slide2 { background-image: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1920&h=1080&fit=crop'); }
+        .slide3 { background-image: url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&h=1080&fit=crop'); }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            animation: fadeInUp 1.5s ease;
+        }
+
+        .hero-content h1 {
+            font-size: 5.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 3px 3px 10px rgba(0,0,0,0.8);
+            background: linear-gradient(135deg, #FFD700, #FFA500, #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 3s infinite;
+            background-size: 200% auto;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .hero-content p {
+            font-size: 1.8rem;
+            margin-bottom: 2.5rem;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+            letter-spacing: 2px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #000;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: all 0.4s;
+            box-shadow: 0 5px 25px rgba(255, 215, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(255, 215, 0, 0.6);
+        }
+
+        .cta-button.secondary {
+            background: transparent;
+            border: 2px solid #FFD700;
+            color: #FFD700;
+        }
+
+        .cta-button.secondary:hover {
+            background: #FFD700;
+            color: #000;
+        }
+
+        /* Floating badges */
+        .hero-badges {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 3rem;
+            z-index: 10;
+        }
+
+        .badge {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .badge:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+
+        .badge:nth-child(3) {
+            animation-delay: 1s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Section avec photo d'arrière-plan */
+        .parallax-section {
+            padding: 8rem 2rem;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('https://images.unsplash.com/photo-1559339352-11d035aa65de?w=1920&h=1080&fit=crop') center/cover fixed;
+            color: white;
+            text-align: center;
+        }
+
+        .parallax-section h2 {
+            color: white;
+            font-size: 4rem;
+            margin-bottom: 2rem;
+        }
+
+        .parallax-section p {
+            font-size: 1.4rem;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            line-height: 2;
+        }
+
+        /* Stats Section */
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 5rem;
+            margin-top: 3rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            font-size: 1.2rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Sections */
+        section {
+            padding: 6rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            font-size: 4rem;
+            text-align: center;
+            margin-bottom: 4rem;
+            background: linear-gradient(135deg, #1a1a1a, #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            display: block;
+            width: 150px;
+            height: 4px;
+            background: linear-gradient(90deg, #FFD700, #FFA500);
+            margin: 1.5rem auto;
+            border-radius: 2px;
+        }
+
+        /* About Section avec images */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.2rem;
+            line-height: 2;
+        }
+
+        .about-images {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            height: 500px;
+        }
+
+        .about-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            transition: transform 0.5s;
+        }
+
+        .about-image:hover {
+            transform: scale(1.05) rotate(2deg);
+        }
+
+        .about-images .about-image:first-child {
+            grid-row: 1 / 3;
+        }
+
+        /* Menu Section - CARDS SPECTACULAIRES */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .menu-card {
+            background: linear-gradient(145deg, #ffffff, #f5f5f5);
+            padding: 0;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            transition: all 0.4s;
+            overflow: hidden;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(255, 215, 0, 0.3);
+        }
+
+        .menu-card-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .menu-card:hover .menu-card-image {
+            transform: scale(1.1);
+        }
+
+        .menu-card-content {
+            padding: 2rem;
+        }
+
+        .menu-card h3 {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.2rem;
+            padding-bottom: 1.2rem;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+
+        .item-name {
+            font-weight: bold;
+            font-size: 1.05rem;
+        }
+
+        .item-price {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+
+        /* Gallery - GRILLE DYNAMIQUE */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .gallery-item {
+            height: 300px;
+            overflow: hidden;
+            border-radius: 15px;
+            position: relative;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .gallery-item:nth-child(1) {
+            grid-column: span 2;
+            grid-row: span 2;
+            height: 615px;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.2) rotate(3deg);
+        }
+
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            opacity: 0;
+            transition: opacity 0.4s;
+            z-index: 1;
+        }
+
+        .gallery-item:hover::before {
+            opacity: 1;
+        }
+
+        /* Contact Section */
+        .contact-wrapper {
+            background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+            padding: 5rem;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info {
+            background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            backdrop-filter: blur(10px);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            color: white;
+        }
+
+        .contact-info h3 {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        .info-item {
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: start;
+            gap: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .info-item strong {
+            color: #FFD700;
+            min-width: 100px;
+        }
+
+        .reservation-form {
+            background: rgba(255,255,255,0.95);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .reservation-form h3 {
+            color: #1a1a1a;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.7rem;
+            font-weight: bold;
+            color: #1a1a1a;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #FFD700;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 1.3rem;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #000;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .submit-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.5);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
+            color: white;
+            text-align: center;
+            padding: 3rem;
+            border-top: 3px solid #FFD700;
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+
+            .about-content,
+            .contact-content,
+            .about-images {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-item:nth-child(1) {
+                grid-column: span 1;
+                grid-row: span 1;
+                height: 300px;
+            }
+
+            nav ul {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .stats {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            h2 {
+                font-size: 2.5rem;
+            }
+
+            .hero-badges {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">✨ La Table d'Émilie</div>
+            <ul>
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#about">À Propos</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#galerie">Galerie</a></li>
+                <li><a href="#contact">Réserver</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="accueil" class="hero">
+        <div class="hero-slider">
+            <div class="hero-slide slide1 active"></div>
+            <div class="hero-slide slide2"></div>
+            <div class="hero-slide slide3"></div>
+        </div>
+        <div class="hero-content">
+            <h1>La Table d'Émilie</h1>
+            <p>✨ L'Excellence Gastronomique au Cœur de Paris ✨</p>
+            <div class="cta-buttons">
+                <a href="#contact" class="cta-button">Réserver Maintenant</a>
+                <a href="#menu" class="cta-button secondary">Découvrir la Carte</a>
+            </div>
+        </div>
+        <div class="hero-badges">
+            <div class="badge">⭐ Prix Gault & Millau 2024</div>
+            <div class="badge">🏆 Maître Restaurateur</div>
+            <div class="badge">🌿 Produits Bio & Locaux</div>
+        </div>
+    </section>
+
+    <div class="parallax-section">
+        <h2>Une Passion, Une Histoire</h2>
+        <p>Depuis 2018, notre chef Émilie Rousseau vous fait voyager à travers une cuisine française raffinée qui célèbre les saisons et les terroirs. Chaque assiette raconte une histoire, chaque bouchée est une émotion.</p>
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-number">7+</div>
+                <div class="stat-label">Années d'Excellence</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">50K+</div>
+                <div class="stat-label">Clients Satisfaits</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Produits Frais</div>
+            </div>
+        </div>
+    </div>
+
+    <section id="about">
+        <h2>Notre Univers</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p style="margin-bottom: 2rem;">
+                    🌟 Niché dans le quartier historique du <strong>Marais</strong>, La Table d'Émilie vous accueille dans un écrin élégant où modernité et tradition se rencontrent pour créer une expérience culinaire inoubliable.
+                </p>
+                <p style="margin-bottom: 2rem;">
+                    Notre cuisine célèbre les <strong>produits de saison</strong>, sourcés chez des producteurs locaux passionnés. Du marché à l'assiette, nous privilégions les circuits courts et le bio pour vous offrir des saveurs authentiques et intenses.
+                </p>
+                <p style="margin-bottom: 2rem;">
+                    Chaque plat est une <strong>œuvre d'art</strong> préparée avec amour, créativité et un respect infini pour les ingrédients. Notre engagement : sublimer la gastronomie française tout en innovant avec audace.
+                </p>
+                <p style="font-size: 1.3rem; color: #FFD700; font-weight: bold;">
+                    🏆 Récompensé par le Guide Gault & Millau 2024<br>
+                    ⭐ Certifié Maître Restaurateur
+                </p>
+            </div>
+            <div class="about-images">
+                <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&h=800&fit=crop" alt="Intérieur restaurant" class="about-image">
+                <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?w=400&h=400&fit=crop" alt="Chef au travail" class="about-image">
+                <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400&h=400&fit=crop" alt="Ambiance" class="about-image">
+            </div>
+        </div>
+    </section>
+
+    <section id="menu">
+        <h2>Notre Carte Signature</h2>
+        <div class="menu-grid">
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1625944525533-473f1a3d54e7?w=600&h=400&fit=crop" alt="Entrées" class="menu-card-image">
+                <div class="menu-card-content">
+                    <h3>🥗 Entrées</h3>
+                    <div class="menu-item">
+                        <span class="item-name">Foie gras maison mi-cuit</span>
+                        <span class="item-price">18€</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Tartare de saumon bio</span>
+                        <span class="item-price">16€</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Velouté de courge butternut</span>
+                        <span class="item-price">12€</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Burrata & tomates confites</span>
+                        <span class="item-price">14€</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=600&h=400&fit=crop" alt="Plats" class="menu-card-image">
+                <div class="menu-card-content">
+                    <h3>🍽️ Plats</h3>
+                    <div class="menu-item">
+                        <span class="item-name">Magret de canard aux figues</span>
+                        <span class="item-price">28€</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Filet de bœuf Rossini</span>
+                        <span class="item-price">32€</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Loup de mer en croûte de sel</span>
+                        <span class="item-price">29€</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Risotto cèpes & truffe noire</span>
+                        <span class="item-price">24€</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?w=600&h=400&fit=crop" alt="Desserts" class="menu-card-image">
+                <div class="menu-card-content">
+                    <h3>🍰 Desserts</h3>
+                    <div class="menu-item">
+                        <span class="item-name">Tarte tatin revisitée</span>
+                        <span class="item-price">10€</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Fondant chocolat Valrhona</span>
+                        <span class="item-price">11€</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Crème brûlée vanille bourbon</span>
+                        <span class="item-price">9€</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Profiteroles maison</span>
+                        <span class="item-price">10€</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="galerie">
+        <h2>Nos Créations Culinaires</h2>
+        <div class="gallery">
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&h=800&fit=crop" alt="Plat signature">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=600&h=400&fit=crop" alt="Viande grillée">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&h=400&fit=crop" alt="Dessert raffiné">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?w=600&h=400&fit=crop" alt="Poisson">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&h=400&fit=crop" alt="Pizza artisanale">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w
