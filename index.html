@@ -837,4 +837,210 @@
                 <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&h=400&fit=crop" alt="Pizza artisanale">
             </div>
             <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w
+                <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=600&h=400&fit=crop" alt="Restaurant ambiance">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=600&h=400&fit=crop" alt="Plat gastronomique">
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Réservez Votre Table</h2>
+        <div class="contact-wrapper">
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>📍 Nous Trouver</h3>
+                    <div class="info-item">
+                        <strong>Adresse :</strong>
+                        <span>28 Rue des Francs-Bourgeois<br>75004 Paris, France</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>Téléphone :</strong>
+                        <span>01 42 78 56 34</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>Email :</strong>
+                        <span>contact@latabledemeilie.fr</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>Horaires :</strong>
+                        <span>
+                            <strong>Mardi - Samedi</strong><br>
+                            Déjeuner : 12h00 - 14h30<br>
+                            Dîner : 19h00 - 22h30<br><br>
+                            <strong>Dimanche</strong><br>
+                            Brunch : 12h00 - 15h00<br><br>
+                            Fermé le lundi
+                        </span>
+                    </div>
+                </div>
+
+                <div class="reservation-form">
+                    <h3>✨ Réservation en Ligne</h3>
+                    <form onsubmit="handleSubmit(event)">
+                        <div class="form-group">
+                            <label>Nom complet *</label>
+                            <input type="text" required placeholder="Jean Dupont">
+                        </div>
+                        <div class="form-group">
+                            <label>Email *</label>
+                            <input type="email" required placeholder="email@exemple.com">
+                        </div>
+                        <div class="form-group">
+                            <label>Téléphone *</label>
+                            <input type="tel" required placeholder="06 12 34 56 78">
+                        </div>
+                        <div class="form-group">
+                            <label>Date *</label>
+                            <input type="date" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Heure *</label>
+                            <select required>
+                                <option value="">Choisir une heure</option>
+                                <option>12:00</option>
+                                <option>12:30</option>
+                                <option>13:00</option>
+                                <option>13:30</option>
+                                <option>19:00</option>
+                                <option>19:30</option>
+                                <option>20:00</option>
+                                <option>20:30</option>
+                                <option>21:00</option>
+                                <option>21:30</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Nombre de personnes *</label>
+                            <select required>
+                                <option value="">Choisir</option>
+                                <option>1 personne</option>
+                                <option>2 personnes</option>
+                                <option>3 personnes</option>
+                                <option>4 personnes</option>
+                                <option>5 personnes</option>
+                                <option>6 personnes</option>
+                                <option>Plus de 6 personnes</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="submit-button">🎉 Confirmer ma Réservation</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p style="font-size: 1.2rem; margin-bottom: 1rem;">✨ La Table d'Émilie ✨</p>
+        <p>&copy; 2025 La Table d'Émilie. Tous droits réservés.</p>
+        <p style="margin-top: 1rem;">Développé avec passion pour la gastronomie française 🇫🇷</p>
+    </footer>
+
+    <script>
+        // Slider automatique pour le hero
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.hero-slide');
+        
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+        
+        setInterval(nextSlide, 5000);
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Form submission
+        function handleSubmit(event) {
+            event.preventDefault();
+            alert('🎉 Merci pour votre réservation !\n\nNous vous confirmerons votre réservation par email dans les plus brefs délais.\n\nÀ très bientôt à La Table d\'Émilie ! ✨');
+            event.target.reset();
+        }
+
+        // Animation des éléments au scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 1s ease forwards';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.menu-card, .gallery-item, .stat-item').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Header effet au scroll
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                header.style.padding = '0.8rem 0';
+                header.style.background = 'rgba(0, 0, 0, 0.98)';
+            } else {
+                header.style.padding = '1.2rem 0';
+                header.style.background = 'rgba(0, 0, 0, 0.95)';
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        // Animation des statistiques
+        function animateValue(element, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const value = Math.floor(progress * (end - start) + start);
+                element.textContent = end > 100 ? value + 'K+' : value + '+';
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const statNumber = entry.target.querySelector('.stat-number');
+                    const finalValue = parseInt(statNumber.textContent);
+                    if (finalValue === 7) {
+                        animateValue(statNumber, 0, 7, 2000);
+                    } else if (finalValue === 50) {
+                        animateValue(statNumber, 0, 50, 2000);
+                    } else if (finalValue === 100) {
+                        animateValue(statNumber, 0, 100, 2000);
+                    }
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.stat-item').forEach(stat => {
+            statsObserver.observe(stat);
+        });
+    </script>
+</body>
+</html>
