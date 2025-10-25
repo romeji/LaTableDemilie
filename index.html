@@ -94,10 +94,61 @@
             color: #d4af37;
         }
 
+        /* Boutons CTA Header */
+        .header-cta {
+            position: fixed;
+            top: 2rem;
+            z-index: 1001;
+            animation: fadeInDown 1s ease;
+        }
+
+        .header-cta.left {
+            left: 3rem;
+        }
+
+        .header-cta.right {
+            right: 3rem;
+        }
+
+        .header-cta a {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: rgba(212, 175, 55, 0.95);
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 400;
+            transition: all 0.4s;
+            border: 1px solid #d4af37;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-family: 'Helvetica Neue', sans-serif;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-cta a:hover {
+            background: rgba(255, 255, 255, 0.95);
+            color: #2c2c2c;
+            border-color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.3);
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         /* Hero Section */
         .hero {
             height: 100vh;
-            width: 100%;
+            width: 100vw;
             position: relative;
             display: flex;
             align-items: center;
@@ -105,14 +156,16 @@
             text-align: center;
             color: white;
             overflow: hidden;
+            margin: 0;
+            padding: 0;
         }
 
         .hero-slider {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            width: 100vw;
+            height: 100vh;
         }
 
         .hero-slide {
@@ -125,6 +178,7 @@
             transition: opacity 2.5s ease-in-out;
             background-size: cover;
             background-position: center;
+            background-repeat: no-repeat;
         }
 
         .hero-slide.active {
@@ -267,6 +321,16 @@
             line-height: 2;
             font-weight: 300;
             letter-spacing: 0.5px;
+        }
+
+        .story-quote {
+            font-size: 1.5rem;
+            font-style: italic;
+            color: #d4af37;
+            margin-top: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .stats {
@@ -445,18 +509,16 @@
             letter-spacing: 1px;
         }
 
-        /* Gallery moderne et artistique */
+        /* Gallery moderne et sobre */
         .gallery-container {
             margin-top: 4rem;
             position: relative;
-            min-height: 800px;
         }
 
         .gallery {
             display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            grid-template-rows: repeat(8, 100px);
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
             padding: 2rem;
         }
 
@@ -464,57 +526,19 @@
             overflow: hidden;
             position: relative;
             cursor: pointer;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
             transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            height: 350px;
         }
 
-        .gallery-item:nth-child(1) {
-            grid-column: 1 / 6;
-            grid-row: 1 / 5;
-            border-radius: 200px 200px 20px 20px;
-            z-index: 2;
-        }
-
-        .gallery-item:nth-child(2) {
-            grid-column: 6 / 10;
-            grid-row: 2 / 5;
-            border-radius: 20px;
-            transform: rotate(-2deg);
-            z-index: 3;
-        }
-
-        .gallery-item:nth-child(3) {
-            grid-column: 10 / 13;
-            grid-row: 1 / 4;
-            border-radius: 20px 20px 200px 20px;
-        }
-
+        .gallery-item:nth-child(1),
         .gallery-item:nth-child(4) {
-            grid-column: 1 / 5;
-            grid-row: 5 / 9;
-            border-radius: 20px 200px 20px 20px;
-            transform: rotate(1deg);
+            height: 450px;
         }
 
+        .gallery-item:nth-child(2),
         .gallery-item:nth-child(5) {
-            grid-column: 5 / 9;
-            grid-row: 5 / 8;
-            border-radius: 50%;
-            z-index: 4;
-        }
-
-        .gallery-item:nth-child(6) {
-            grid-column: 9 / 13;
-            grid-row: 4 / 7;
-            border-radius: 20px;
-            transform: rotate(-1deg);
-        }
-
-        .gallery-item:nth-child(7) {
-            grid-column: 7 / 11;
-            grid-row: 7 / 9;
-            border-radius: 200px 20px 200px 20px;
-            z-index: 2;
+            transform: translateY(30px);
         }
 
         .gallery-item img {
@@ -522,17 +546,16 @@
             height: 100%;
             object-fit: cover;
             transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
-            filter: grayscale(15%);
+            filter: grayscale(10%);
         }
 
         .gallery-item:hover {
-            transform: scale(1.05) translateY(-10px) rotate(0deg) !important;
-            z-index: 10 !important;
-            box-shadow: 0 20px 60px rgba(212, 175, 55, 0.3);
+            transform: translateY(-10px) !important;
+            box-shadow: 0 20px 60px rgba(212, 175, 55, 0.25);
         }
 
         .gallery-item:hover img {
-            transform: scale(1.1);
+            transform: scale(1.08);
             filter: grayscale(0%);
         }
 
@@ -740,21 +763,31 @@
 
             .gallery {
                 grid-template-columns: 1fr;
-                grid-template-rows: repeat(7, 300px);
-                gap: 2rem;
+                gap: 1.5rem;
             }
 
+            .gallery-item,
             .gallery-item:nth-child(1),
-            .gallery-item:nth-child(2),
-            .gallery-item:nth-child(3),
-            .gallery-item:nth-child(4),
-            .gallery-item:nth-child(5),
-            .gallery-item:nth-child(6),
-            .gallery-item:nth-child(7) {
-                grid-column: 1;
-                grid-row: auto;
-                border-radius: 20px !important;
+            .gallery-item:nth-child(4) {
+                height: 300px !important;
                 transform: none !important;
+            }
+
+            .header-cta {
+                top: 1rem;
+            }
+
+            .header-cta.left {
+                left: 1rem;
+            }
+
+            .header-cta.right {
+                right: 1rem;
+            }
+
+            .header-cta a {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.8rem;
             }
 
             .form-row {
@@ -787,13 +820,20 @@
     </style>
 </head>
 <body>
+    <!-- Boutons CTA en haut -->
+    <div class="header-cta left">
+        <a href="#contact">Réserver</a>
+    </div>
+    <div class="header-cta right">
+        <a href="#menu">Notre Carte</a>
+    </div>
+
     <header>
         <nav>
             <div class="logo">La Table <span>d'Émilie</span></div>
             <ul>
                 <li><a href="#accueil">Accueil</a></li>
                 <li><a href="#about">À Propos</a></li>
-                <li><a href="#menu">Menu</a></li>
                 <li><a href="#galerie">Galerie</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
@@ -824,6 +864,8 @@
     <div class="parallax-section">
         <h2>Une Passion, Une Histoire</h2>
         <p>Depuis 2018, notre chef Émilie Rousseau vous fait voyager à travers une cuisine française raffinée qui célèbre les saisons et les terroirs. Chaque assiette raconte une histoire, chaque bouchée est une émotion.</p>
+        <p class="story-quote">"J'ai grandi dans la ferme de mes grands-parents en Bourgogne, entourée de potagers généreux et de recettes transmises de génération en génération. C'est cette authenticité que je souhaite partager avec vous."</p>
+        <p style="margin-top: 2rem; font-size: 1.1rem;">— Émilie Rousseau, Chef</p>
         <div class="stats">
             <div class="stat-item">
                 <div class="stat-number">7+</div>
@@ -848,10 +890,13 @@
                     Niché dans le quartier historique du <strong>Marais</strong>, La Table d'Émilie vous accueille dans un écrin élégant où modernité et tradition se rencontrent pour créer une expérience culinaire inoubliable.
                 </p>
                 <p>
-                    Notre cuisine célèbre les <strong>produits de saison</strong>, sourcés chez des producteurs locaux passionnés. Du marché à l'assiette, nous privilégions les circuits courts et le bio pour vous offrir des saveurs authentiques et intenses.
+                    <strong>L'histoire commence en 2018</strong>, lorsqu'Émilie, après avoir perfectionné son art dans les cuisines étoilées de France, décide de réaliser son rêve : créer un lieu chaleureux où la haute gastronomie rencontre l'authenticité des produits de terroir.
                 </p>
                 <p>
-                    Chaque plat est une <strong>œuvre d'art</strong> préparée avec amour, créativité et un respect infini pour les ingrédients. Notre engagement : sublimer la gastronomie française tout en innovant avec audace.
+                    Notre cuisine célèbre les <strong>produits de saison</strong>, sourcés chez des producteurs locaux passionnés que nous connaissons personnellement. Chaque matin, notre équipe sélectionne les meilleurs ingrédients au marché d'Aligre, privilégiant les circuits courts et le bio.
+                </p>
+                <p>
+                    Chaque plat est une <strong>œuvre d'art</strong> préparée avec amour, créativité et un respect infini pour les ingrédients. Du potager à l'assiette, nous racontons l'histoire des hommes et des femmes qui cultivent, élèvent et produisent avec passion.
                 </p>
                 <p style="margin-top: 2rem; color: #d4af37;">
                     <strong>Récompensé par le Guide Gault & Millau 2024</strong><br>
@@ -868,6 +913,9 @@
 
     <section id="menu">
         <h2>Notre Carte Signature</h2>
+        <p style="text-align: center; max-width: 700px; margin: -3rem auto 4rem; font-size: 1.15rem; line-height: 1.8; color: #666;">
+            Chaque plat de notre carte est une célébration des saisons. Notre menu évolue au rythme de la nature, garantissant fraîcheur et saveurs exceptionnelles.
+        </p>
         <div class="menu-grid">
             <div class="menu-card">
                 <img src="https://images.unsplash.com/photo-1625944525533-473f1a3d54e7?w=600&h=400&fit=crop" alt="Entrées" class="menu-card-image">
@@ -942,6 +990,9 @@
 
     <section id="galerie">
         <h2>Nos Créations Culinaires</h2>
+        <p style="text-align: center; max-width: 700px; margin: -3rem auto 4rem; font-size: 1.15rem; line-height: 1.8; color: #666;">
+            Découvrez nos créations où chaque assiette est pensée comme une toile, alliant esthétique et saveurs. L'art culinaire dans toute sa splendeur.
+        </p>
         <div class="gallery-container">
             <div class="gallery">
                 <div class="gallery-item">
@@ -972,7 +1023,7 @@
     <section id="contact">
         <div class="contact-hero">
             <h2>Réservez Votre Expérience</h2>
-            <p>Laissez-vous transporter dans un voyage culinaire inoubliable</p>
+            <p>Laissez-vous transporter dans un voyage culinaire inoubliable. Chaque réservation est le début d'une histoire que nous écrivons ensemble, autour de notre table.</p>
         </div>
         <div class="contact-wrapper">
             <div class="contact-grid">
