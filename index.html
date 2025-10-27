@@ -16,21 +16,20 @@
             line-height: 1.6;
             color: #2c2c2c;
             overflow-x: hidden;
+            background: white;
         }
 
         /* Header */
         header {
             background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(20px);
-            color: #2c2c2c;
             padding: 1.5rem 0;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 30px rgba(0,0,0,0.08);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
             transition: all 0.3s ease;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
         }
 
         nav {
@@ -48,7 +47,7 @@
             color: #2c2c2c;
             letter-spacing: 3px;
             text-transform: uppercase;
-            font-family: 'Helvetica Neue', sans-serif;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
         }
 
         .logo span {
@@ -65,107 +64,55 @@
         nav a {
             color: #2c2c2c;
             text-decoration: none;
-            transition: all 0.3s;
+            transition: color 0.3s;
             font-size: 0.95rem;
-            position: relative;
             text-transform: uppercase;
             letter-spacing: 1.5px;
             font-weight: 300;
-            font-family: 'Helvetica Neue', sans-serif;
-        }
-
-        nav a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 1px;
-            background: #d4af37;
-            transition: width 0.3s;
-        }
-
-        nav a:hover::after {
-            width: 100%;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
         }
 
         nav a:hover {
             color: #d4af37;
         }
 
-        /* Boutons CTA Header */
-        .header-cta {
-            position: fixed;
-            top: 2rem;
-            z-index: 1001;
-            animation: fadeInDown 1s ease;
+        /* Menu mobile */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
         }
 
-        .header-cta.left {
-            left: 3rem;
+        .menu-toggle span {
+            width: 25px;
+            height: 2px;
+            background: #2c2c2c;
+            transition: all 0.3s;
         }
 
-        .header-cta.right {
-            right: 3rem;
-        }
-
-        .header-cta a {
-            display: inline-block;
-            padding: 1rem 2rem;
-            background: rgba(212, 175, 55, 0.95);
-            color: white;
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 400;
-            transition: all 0.4s;
-            border: 1px solid #d4af37;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-family: 'Helvetica Neue', sans-serif;
-            backdrop-filter: blur(10px);
-        }
-
-        .header-cta a:hover {
-            background: rgba(255, 255, 255, 0.95);
-            color: #2c2c2c;
-            border-color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.3);
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Hero Section */
+        /* Hero avec background */
         .hero {
-            height: 100vh;
-            width: 100vw;
+            min-height: 100vh;
+            width: 100%;
             position: relative;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
             color: white;
             overflow: hidden;
-            margin: 0;
-            padding: 0;
+            padding: 2rem 1rem 3rem;
         }
 
-        .hero-slider {
-            position: fixed;
+        .hero-background {
+            position: absolute;
             top: 0;
             left: 0;
-            width: 100vw;
-            height: 100vh;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
         }
 
         .hero-slide {
@@ -178,28 +125,17 @@
             transition: opacity 2.5s ease-in-out;
             background-size: cover;
             background-position: center;
-            background-repeat: no-repeat;
         }
 
         .hero-slide.active {
             opacity: 1;
-            animation: kenBurns 20s ease-out infinite;
-        }
-
-        @keyframes kenBurns {
-            0% { transform: scale(1) translateX(0); }
-            50% { transform: scale(1.08) translateX(-2%); }
-            100% { transform: scale(1) translateX(0); }
         }
 
         .hero-slide::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.5) 100%);
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.7));
         }
 
         .slide1 { background-image: url('https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=2400&h=1350&fit=crop'); }
@@ -209,9 +145,9 @@
         .hero-content {
             position: relative;
             z-index: 10;
-            animation: fadeInUp 1.8s ease;
             max-width: 900px;
             padding: 0 2rem;
+            margin-top: 5rem;
         }
 
         .hero-content h1 {
@@ -220,28 +156,26 @@
             font-weight: 300;
             letter-spacing: 8px;
             text-transform: uppercase;
-            font-family: 'Helvetica Neue', sans-serif;
-            text-shadow: 2px 2px 20px rgba(0,0,0,0.3);
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            text-shadow: 3px 3px 30px rgba(0,0,0,0.8);
         }
 
         .hero-subtitle {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             margin-bottom: 3rem;
             letter-spacing: 3px;
             font-weight: 300;
-            opacity: 0.95;
             line-height: 1.8;
+            text-shadow: 2px 2px 20px rgba(0,0,0,0.8);
         }
 
         .cta-buttons {
             display: flex;
             gap: 1.5rem;
             justify-content: center;
-            flex-wrap: wrap;
         }
 
         .cta-button {
-            display: inline-block;
             padding: 1.2rem 3rem;
             background: #d4af37;
             color: white;
@@ -252,37 +186,35 @@
             border: 1px solid #d4af37;
             text-transform: uppercase;
             letter-spacing: 2px;
-            font-family: 'Helvetica Neue', sans-serif;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
         }
 
         .cta-button:hover {
             background: transparent;
-            color: white;
-            border-color: white;
             transform: translateY(-3px);
         }
 
         .cta-button.secondary {
             background: transparent;
             border: 1px solid white;
-            color: white;
         }
 
         .cta-button.secondary:hover {
             background: white;
             color: #2c2c2c;
-            border-color: white;
         }
 
-        /* Hero badges */
         .hero-badges {
-            position: absolute;
-            bottom: 50px;
-            left: 50%;
-            transform: translateX(-50%);
+            position: relative;
+            bottom: auto;
+            left: auto;
+            transform: none;
             display: flex;
             gap: 3rem;
             z-index: 10;
+            margin-top: 3rem;
+            justify-content: center;
+            flex-wrap: wrap;
         }
 
         .badge {
@@ -293,73 +225,11 @@
             font-size: 0.85rem;
             letter-spacing: 1.5px;
             text-transform: uppercase;
-            font-family: 'Helvetica Neue', sans-serif;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
             font-weight: 300;
         }
 
-        /* Section Parallaxe */
-        .parallax-section {
-            padding: 8rem 2rem;
-            background: linear-gradient(rgba(44,44,44,0.92), rgba(44,44,44,0.92)), 
-                        url('https://images.unsplash.com/photo-1559339352-11d035aa65de?w=1920&h=1080&fit=crop') center/cover fixed;
-            color: white;
-            text-align: center;
-        }
-
-        .parallax-section h2 {
-            color: white;
-            font-size: 3.5rem;
-            margin-bottom: 2rem;
-            font-weight: 300;
-            letter-spacing: 4px;
-        }
-
-        .parallax-section p {
-            font-size: 1.3rem;
-            max-width: 800px;
-            margin: 0 auto 4rem;
-            line-height: 2;
-            font-weight: 300;
-            letter-spacing: 0.5px;
-        }
-
-        .story-quote {
-            font-size: 1.5rem;
-            font-style: italic;
-            color: #d4af37;
-            margin-top: 3rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .stats {
-            display: flex;
-            justify-content: center;
-            gap: 6rem;
-            margin-top: 3rem;
-        }
-
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 4rem;
-            font-weight: 300;
-            color: #d4af37;
-            letter-spacing: 2px;
-        }
-
-        .stat-label {
-            font-size: 1rem;
-            margin-top: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: 300;
-        }
-
-        /* Sections */
+        /* Sections sur fond blanc */
         section {
             padding: 7rem 2rem;
             max-width: 1400px;
@@ -369,13 +239,12 @@
         h2 {
             font-size: 3.5rem;
             text-align: center;
-            margin-bottom: 5rem;
+            margin-bottom: 3rem;
             color: #2c2c2c;
-            position: relative;
             font-weight: 300;
             letter-spacing: 4px;
             text-transform: uppercase;
-            font-family: 'Helvetica Neue', sans-serif;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
         }
 
         h2::after {
@@ -387,7 +256,79 @@
             margin: 2rem auto 0;
         }
 
-        /* About Section */
+        .section-intro {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 5rem;
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: #555;
+            font-weight: 300;
+        }
+
+        /* Section Parallaxe */
+        .parallax-section {
+            padding: 8rem 2rem;
+            background: linear-gradient(rgba(30,30,30,0.88), rgba(30,30,30,0.88)), 
+                        url('https://images.unsplash.com/photo-1559339352-11d035aa65de?w=1920&h=1080&fit=crop') center/cover fixed;
+            color: white;
+            text-align: center;
+            margin: 0;
+            max-width: 100%;
+        }
+
+        .parallax-section h2 {
+            color: white;
+        }
+
+        .parallax-section h2::after {
+            background: #d4af37;
+        }
+
+        .parallax-section p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            line-height: 2;
+            font-weight: 300;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
+        }
+
+        .story-quote {
+            font-size: 1.5rem;
+            font-style: italic;
+            color: #f4d47a;
+            margin: 3rem auto;
+            max-width: 700px;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 6rem;
+            margin-top: 4rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 4rem;
+            font-weight: 300;
+            color: #d4af37;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            margin-top: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 300;
+        }
+
+        /* About */
         .about-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -399,7 +340,7 @@
             font-size: 1.15rem;
             line-height: 2;
             font-weight: 300;
-            letter-spacing: 0.3px;
+            color: #444;
         }
 
         .about-text p {
@@ -422,8 +363,8 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.6s ease;
-            filter: grayscale(20%);
+            transition: transform 0.6s;
+            filter: grayscale(15%);
         }
 
         .about-image:hover {
@@ -435,19 +376,18 @@
             grid-row: 1 / 3;
         }
 
-        /* Menu Section */
+        /* Menu */
         .menu-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 3rem;
-            margin-top: 3rem;
         }
 
         .menu-card {
             background: white;
             overflow: hidden;
             box-shadow: 0 5px 30px rgba(0,0,0,0.08);
-            transition: all 0.5s ease;
+            transition: all 0.5s;
             border: 1px solid rgba(212, 175, 55, 0.1);
         }
 
@@ -460,7 +400,7 @@
             width: 100%;
             height: 280px;
             object-fit: cover;
-            transition: transform 0.6s ease;
+            transition: transform 0.6s;
             filter: grayscale(10%);
         }
 
@@ -480,13 +420,12 @@
             font-weight: 400;
             letter-spacing: 2px;
             text-transform: uppercase;
-            font-family: 'Helvetica Neue', sans-serif;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
         }
 
         .menu-item {
             display: flex;
             justify-content: space-between;
-            align-items: center;
             margin-bottom: 1.5rem;
             padding-bottom: 1.5rem;
             border-bottom: 1px solid #f0f0f0;
@@ -499,35 +438,26 @@
         .item-name {
             font-weight: 300;
             font-size: 1.05rem;
-            letter-spacing: 0.5px;
         }
 
         .item-price {
             color: #d4af37;
             font-weight: 400;
             font-size: 1.2rem;
-            letter-spacing: 1px;
         }
 
-        /* Gallery moderne et sobre */
-        .gallery-container {
-            margin-top: 4rem;
-            position: relative;
-        }
-
+        /* Gallery */
         .gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2rem;
-            padding: 2rem;
         }
 
         .gallery-item {
             overflow: hidden;
-            position: relative;
             cursor: pointer;
             box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            transition: all 0.6s;
             height: 350px;
         }
 
@@ -536,21 +466,16 @@
             height: 450px;
         }
 
-        .gallery-item:nth-child(2),
-        .gallery-item:nth-child(5) {
-            transform: translateY(30px);
-        }
-
         .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+            transition: all 0.8s;
             filter: grayscale(10%);
         }
 
         .gallery-item:hover {
-            transform: translateY(-10px) !important;
+            transform: translateY(-10px);
             box-shadow: 0 20px 60px rgba(212, 175, 55, 0.25);
         }
 
@@ -559,15 +484,15 @@
             filter: grayscale(0%);
         }
 
-        /* Contact Section moderne et élégante */
-        #contact {
+        /* Contact */
+        .contact-section {
             padding: 0;
             max-width: 100%;
             background: #f8f8f8;
         }
 
         .contact-hero {
-            background: linear-gradient(135deg, rgba(44,44,44,0.95), rgba(44,44,44,0.98)), 
+            background: linear-gradient(rgba(30,30,30,0.90), rgba(30,30,30,0.90)), 
                         url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=2000&h=1000&fit=crop') center/cover;
             padding: 5rem 2rem;
             text-align: center;
@@ -576,15 +501,14 @@
 
         .contact-hero h2 {
             color: white;
-            margin-bottom: 1.5rem;
         }
 
         .contact-hero p {
             font-size: 1.2rem;
-            max-width: 600px;
+            max-width: 700px;
             margin: 0 auto;
             font-weight: 300;
-            letter-spacing: 1px;
+            line-height: 1.8;
         }
 
         .contact-wrapper {
@@ -627,7 +551,6 @@
 
         .info-item:hover {
             padding-left: 2.5rem;
-            border-left-width: 3px;
         }
 
         .info-label {
@@ -718,7 +641,6 @@
             background: transparent;
             color: #d4af37;
             transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.2);
         }
 
         /* Footer */
@@ -728,7 +650,6 @@
             text-align: center;
             padding: 3rem;
             font-weight: 300;
-            letter-spacing: 1px;
         }
 
         footer p {
@@ -736,112 +657,224 @@
             font-size: 0.9rem;
         }
 
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .about-content,
+            .contact-grid {
+                grid-template-columns: 1fr;
             }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+
+            .stats {
+                gap: 3rem;
             }
         }
 
-        /* Mobile Responsive */
-        @media (max-width: 968px) {
-            .hero-content h1 {
-                font-size: 3rem;
-                letter-spacing: 4px;
+        @media (max-width: 768px) {
+            nav {
+                padding: 0 1.5rem;
             }
 
-            .about-content,
-            .contact-grid,
+            nav ul {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1.5rem;
+                box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+                transition: left 0.3s;
+            }
+
+            nav ul.active {
+                left: 0;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .hero {
+                padding: 1rem;
+                min-height: 100vh;
+            }
+
+            .hero-content {
+                padding: 0 1rem;
+                margin-top: 6rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2.2rem;
+                letter-spacing: 3px;
+                margin-bottom: 1rem;
+                text-shadow: 3px 3px 30px rgba(0,0,0,0.9);
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+                letter-spacing: 2px;
+                margin-bottom: 2rem;
+                text-shadow: 2px 2px 20px rgba(0,0,0,0.9);
+            }
+
+            h2 {
+                font-size: 2.5rem;
+                letter-spacing: 2px;
+            }
+
+            section {
+                padding: 4rem 1.5rem;
+            }
+
+            .parallax-section {
+                padding: 5rem 1.5rem;
+                background-attachment: scroll;
+            }
+
+            .hero-badges {
+                margin-top: 2rem;
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 0.8rem;
+                padding: 0 1rem;
+            }
+
+            .badge {
+                background: rgba(0, 0, 0, 0.7);
+                backdrop-filter: blur(10px);
+                padding: 0.7rem 1.2rem;
+                font-size: 0.65rem;
+                border: 1px solid rgba(255, 255, 255, 0.3);
+                flex: 0 1 auto;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .cta-button {
+                width: 100%;
+                padding: 1rem 2rem;
+            }
+
             .about-images {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+
+            .about-images .about-image {
+                height: 300px;
+            }
+
+            .about-images .about-image:first-child {
+                grid-row: auto;
+            }
+
+            .menu-grid {
                 grid-template-columns: 1fr;
             }
 
             .gallery {
                 grid-template-columns: 1fr;
-                gap: 1.5rem;
             }
 
             .gallery-item,
             .gallery-item:nth-child(1),
             .gallery-item:nth-child(4) {
-                height: 300px !important;
-                transform: none !important;
-            }
-
-            .header-cta {
-                top: 1rem;
-            }
-
-            .header-cta.left {
-                left: 1rem;
-            }
-
-            .header-cta.right {
-                right: 1rem;
-            }
-
-            .header-cta a {
-                padding: 0.8rem 1.5rem;
-                font-size: 0.8rem;
+                height: 300px;
             }
 
             .form-row {
                 grid-template-columns: 1fr;
             }
 
-            nav ul {
-                gap: 1.5rem;
-                font-size: 0.85rem;
-            }
-
             .stats {
                 flex-direction: column;
-                gap: 3rem;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                min-height: 100vh;
+                padding: 1rem 0.5rem 2rem;
+            }
+
+            .hero-content {
+                margin-top: 5rem;
+                padding: 0 1rem;
+            }
+
+            .hero-content h1 {
+                font-size: 1.8rem;
+                letter-spacing: 2px;
+                margin-bottom: 0.8rem;
+            }
+
+            .hero-subtitle {
+                font-size: 0.9rem;
+                letter-spacing: 1px;
+                margin-bottom: 1.5rem;
             }
 
             h2 {
-                font-size: 2.5rem;
-            }
-
-            .hero-badges {
-                flex-direction: column;
-                gap: 1rem;
+                font-size: 2rem;
             }
 
             .cta-buttons {
-                flex-direction: column;
+                gap: 0.8rem;
+            }
+
+            .cta-button {
+                padding: 1rem 2rem;
+                font-size: 0.85rem;
+            }
+
+            .badge {
+                padding: 0.6rem 1rem;
+                font-size: 0.6rem;
+            }
+
+            .hero-badges {
+                margin-top: 1.5rem;
+                gap: 0.5rem;
+            }
+
+            .section-intro {
+                font-size: 1rem;
+            }
+
+            .parallax-section p,
+            .story-quote {
+                font-size: 1.1rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Boutons CTA en haut -->
-    <div class="header-cta left">
-        <a href="#contact">Réserver</a>
-    </div>
-    <div class="header-cta right">
-        <a href="#menu">Notre Carte</a>
-    </div>
-
     <header>
         <nav>
             <div class="logo">La Table <span>d'Émilie</span></div>
-            <ul>
-                <li><a href="#accueil">Accueil</a></li>
-                <li><a href="#about">À Propos</a></li>
-                <li><a href="#galerie">Galerie</a></li>
-                <li><a href="#contact">Contact</a></li>
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul id="navMenu">
+                <li><a href="#accueil" onclick="closeMenu()">Accueil</a></li>
+                <li><a href="#about" onclick="closeMenu()">À Propos</a></li>
+                <li><a href="#menu" onclick="closeMenu()">Menu</a></li>
+                <li><a href="#galerie" onclick="closeMenu()">Galerie</a></li>
+                <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
             </ul>
         </nav>
     </header>
 
     <section id="accueil" class="hero">
-        <div class="hero-slider">
+        <div class="hero-background">
             <div class="hero-slide slide1 active"></div>
             <div class="hero-slide slide2"></div>
             <div class="hero-slide slide3"></div>
@@ -884,6 +917,9 @@
 
     <section id="about">
         <h2>Notre Univers</h2>
+        <p class="section-intro">
+            Un lieu où la tradition rencontre l'innovation, où chaque plat raconte l'histoire des producteurs passionnés qui cultivent nos ingrédients.
+        </p>
         <div class="about-content">
             <div class="about-text">
                 <p>
@@ -896,11 +932,7 @@
                     Notre cuisine célèbre les <strong>produits de saison</strong>, sourcés chez des producteurs locaux passionnés que nous connaissons personnellement. Chaque matin, notre équipe sélectionne les meilleurs ingrédients au marché d'Aligre, privilégiant les circuits courts et le bio.
                 </p>
                 <p>
-                    Chaque plat est une <strong>œuvre d'art</strong> préparée avec amour, créativité et un respect infini pour les ingrédients. Du potager à l'assiette, nous racontons l'histoire des hommes et des femmes qui cultivent, élèvent et produisent avec passion.
-                </p>
-                <p style="margin-top: 2rem; color: #d4af37;">
-                    <strong>Récompensé par le Guide Gault & Millau 2024</strong><br>
-                    <strong>Certifié Maître Restaurateur</strong>
+                    Du potager à l'assiette, nous racontons l'histoire des hommes et des femmes qui cultivent, élèvent et produisent avec passion. Chaque plat est une <strong>célébration des savoir-faire</strong> et du terroir français.
                 </p>
             </div>
             <div class="about-images">
@@ -913,7 +945,7 @@
 
     <section id="menu">
         <h2>Notre Carte Signature</h2>
-        <p style="text-align: center; max-width: 700px; margin: -3rem auto 4rem; font-size: 1.15rem; line-height: 1.8; color: #666;">
+        <p class="section-intro">
             Chaque plat de notre carte est une célébration des saisons. Notre menu évolue au rythme de la nature, garantissant fraîcheur et saveurs exceptionnelles.
         </p>
         <div class="menu-grid">
@@ -990,40 +1022,38 @@
 
     <section id="galerie">
         <h2>Nos Créations Culinaires</h2>
-        <p style="text-align: center; max-width: 700px; margin: -3rem auto 4rem; font-size: 1.15rem; line-height: 1.8; color: #666;">
+        <p class="section-intro">
             Découvrez nos créations où chaque assiette est pensée comme une toile, alliant esthétique et saveurs. L'art culinaire dans toute sa splendeur.
         </p>
-        <div class="gallery-container">
-            <div class="gallery">
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&h=800&fit=crop" alt="Plat signature">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=600&h=400&fit=crop" alt="Viande grillée">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&h=400&fit=crop" alt="Dessert raffiné">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?w=600&h=400&fit=crop" alt="Poisson">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&h=400&fit=crop" alt="Pizza artisanale">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=600&h=400&fit=crop" alt="Restaurant ambiance">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=600&h=400&fit=crop" alt="Plat gastronomique">
-                </div>
+        <div class="gallery">
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&h=800&fit=crop" alt="Plat signature">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=600&h=400&fit=crop" alt="Viande grillée">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&h=400&fit=crop" alt="Dessert raffiné">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?w=600&h=400&fit=crop" alt="Poisson">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&h=400&fit=crop" alt="Pizza artisanale">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=600&h=400&fit=crop" alt="Restaurant ambiance">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=600&h=400&fit=crop" alt="Plat gastronomique">
             </div>
         </div>
     </section>
 
-    <section id="contact">
+    <section id="contact" class="contact-section">
         <div class="contact-hero">
             <h2>Réservez Votre Expérience</h2>
-            <p>Laissez-vous transporter dans un voyage culinaire inoubliable</p>
+            <p>Laissez-vous transporter dans un voyage culinaire inoubliable. Chaque réservation est le début d'une histoire que nous écrivons ensemble, autour de notre table.</p>
         </div>
         <div class="contact-wrapper">
             <div class="contact-grid">
@@ -1118,7 +1148,7 @@
     </footer>
 
     <script>
-        // Slider automatique pour le hero
+        // Slider hero
         let currentSlide = 0;
         const slides = document.querySelectorAll('.hero-slide');
         
@@ -1130,7 +1160,18 @@
         
         setInterval(nextSlide, 6000);
 
-        // Smooth scrolling
+        // Menu mobile
+        function toggleMenu() {
+            const menu = document.getElementById('navMenu');
+            menu.classList.toggle('active');
+        }
+
+        function closeMenu() {
+            const menu = document.getElementById('navMenu');
+            menu.classList.remove('active');
+        }
+
+        // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -1144,62 +1185,33 @@
             });
         });
 
-        // Form submission
+        // Form submit
         function handleSubmit(event) {
             event.preventDefault();
             alert('Merci pour votre réservation !\n\nNous vous confirmerons votre réservation par email dans les plus brefs délais.\n\nÀ très bientôt à La Table d\'Émilie.');
             event.target.reset();
         }
 
-        // Animation des éléments au scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.animation = 'fadeInUp 1s ease forwards';
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.menu-card, .gallery-item, .stat-item').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Header effet au scroll
-        let lastScroll = 0;
+        // Header au scroll
         window.addEventListener('scroll', () => {
             const header = document.querySelector('header');
-            const currentScroll = window.pageYOffset;
-            
-            if (currentScroll > 100) {
+            if (window.pageYOffset > 100) {
                 header.style.padding = '1rem 0';
                 header.style.boxShadow = '0 4px 30px rgba(0,0,0,0.12)';
             } else {
                 header.style.padding = '1.5rem 0';
-                header.style.boxShadow = '0 2px 30px rgba(0,0,0,0.08)';
+                header.style.boxShadow = '0 2px 20px rgba(0,0,0,0.08)';
             }
-            
-            lastScroll = currentScroll;
         });
 
-        // Animation des statistiques
-        function animateValue(element, start, end, duration) {
-            let startTimestamp = null;
+        // Animation stats
+        function animateValue(element, start, end, duration, suffix) {
+            let startTime = null;
             const step = (timestamp) => {
-                if (!startTimestamp) startTimestamp = timestamp;
-                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                if (!startTime) startTime = timestamp;
+                const progress = Math.min((timestamp - startTime) / duration, 1);
                 const value = Math.floor(progress * (end - start) + start);
-                if (end === 7) {
-                    element.textContent = value + '+';
-                } else if (end === 50) {
-                    element.textContent = value + 'K+';
-                } else {
-                    element.textContent = value + '%';
-                }
+                element.textContent = value + suffix;
                 if (progress < 1) {
                     window.requestAnimationFrame(step);
                 }
@@ -1211,9 +1223,9 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const statNumbers = document.querySelectorAll('.stat-number');
-                    animateValue(statNumbers[0], 0, 7, 2000);
-                    animateValue(statNumbers[1], 0, 50, 2000);
-                    animateValue(statNumbers[2], 0, 100, 2000);
+                    animateValue(statNumbers[0], 0, 7, 2000, '+');
+                    animateValue(statNumbers[1], 0, 50, 2000, 'K+');
+                    animateValue(statNumbers[2], 0, 100, 2000, '%');
                     statsObserver.unobserve(entry.target);
                 }
             });
